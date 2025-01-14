@@ -23,12 +23,16 @@ Before running the project, ensure the following are installed on your machine:
 ## Setup Instructions
 
 ### 1. Clone the Repository
-Clone this repository to your local machine:
+Clone this repository to your local machine:![Screenshot from 2025-01-14 14-33-58](https://github.com/user-attachments/assets/3a929ed3-fdf5-4680-acb7-57bcdedce5dc)
+
 
 git clone <https://github.com/adedaryorh/Bank_Application.git>
 
 
 Add the generated "google-services.json" file from Firebase to the app/ directory.
+
+
+
 
 
 Ensure Firebase services (Authentication, Realtime Database, etc.) are properly set up in your Firebase console.
