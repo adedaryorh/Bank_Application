@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.fintechapp.ui.HomeFragment"
+        android:label="Homepage"
+        tools:layout="@layout/fragment_homepage">
+        <action
+            android:id="@+id/action_home_to_login"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_home_to_signup"
+            app:destination="@id/signupFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.fintechapp.ui.auth.LoginFragment"
+        android:label="Login"
+        tools:layout="@layout/activity_login">
+        <action
+            android:id="@+id/action_login_to_userProfiles"
+            app:destination="@id/usersFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/signupFragment"
+        android:name="com.example.fintechapp.ui.user.SignupFragment"
+        android:label="Signup"
+        tools:layout="@layout/fragment_signup">
+        <action
+            android:id="@+id/action_signup_to_userProfiles"
+            app:destination="@id/usersFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/usersFragment"
+        android:name="com.example.fintechapp.ui.user.UserFragment"
+        android:label="User Profiles"
+        tools:layout="@layout/fragment_users">
+        <action
+            android:id="@+id/action_users_to_transactions"
+            app:destination="@id/accountsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/accountsFragment"
+        android:name="com.example.fintechapp.ui.accounts.AccountsFragment"
+        android:label="Accounts"
+        tools:layout="@layout/fragment_accounts">
+        <action
+            android:id="@+id/action_accounts_to_transactionHistory"
+            app:destination="@id/transactionHistoryFragment" />
+        <action
+            android:id="@+id/action_accounts_to_transfer"
+            app:destination="@id/transferFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/transactionHistoryFragment"
+        android:name="com.example.fintechapp.ui.history.TransactionHistoryFragment"
+        android:label="Transaction History"
+        tools:layout="@layout/fragment_transaction_history" />
+
+    <fragment
+        android:id="@+id/transferFragment"
+        android:name="com.example.fintechapp.ui.transfer.TransferFragment"
+        android:label="Transfer"
+        tools:layout="@layout/fragment_transfer">
+        <action
+            android:id="@+id/action_transfer_to_confirmation"
+            app:destination="@id/transferConfirmationDialog" />
+    </fragment>
+
+    <dialog
+        android:id="@+id/transferConfirmationDialog"
+        android:name="com.example.fintechapp.ui.transfer.TransferConfirmationDialog"
+        android:label="Confirm Transfer"
+        tools:layout="@layout/dialog_transfer_confirmation" />
+</navigation>

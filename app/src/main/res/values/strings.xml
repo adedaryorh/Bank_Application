@@ -1,0 +1,62 @@
+<resources>
+    <string name="app_name">BankClone</string>
+    <string name="back_button_description">Back</string>
+    <string name="toggle_password_visibility">toggle</string>
+
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="clients">Clients</string>
+    <string name="transactions">Transactions</string>
+    <string name="about">About</string>
+    <string name="user_account">Adedayo Adeyemi</string>
+    <string name="bank_logo_text">Kudi Bank</string>
+    <string name="age_20_years">20 years</string>
+    <string name="country_egypt">Egypt</string>
+    <string name="email_com">adedaryorh@gmail.com</string>
+    <string name="google_play_icon_for_about_fragment">google play icon for about fragment</string>
+    <string name="linked_in_icon_for_about_fragment">linked in icon for about fragment</string>
+    <string name="facebook_icon_for_about_fragment">facebook icon for about fragment</string>
+    <string name="balance_item_row">1000000 NGN</string>
+    <string name="junior_android_developer">Junior Android Developer</string>
+    <string name="email_for_about_fragment">email icon for about fragment</string>
+    <string name="place_icon_for_about_fragment">place icon for about fragment</string>
+    <string name="job_icon_for_about_fragment">job icon for about fragment</string>
+    <string name="select_client_fragment">select client fragment</string>
+    <string name="phone_number">+201000883795</string>
+    <string name="select_a_client_to_transfer_money">Select a client to transfer money</string>
+    <string name="enter_money_to_transfer">Enter money to transfer</string>
+    <string name="cancel">Cancel</string>
+    <string name="money_hint">Money</string>
+    <string name="send">Send</string>
+    <string name="from_n_seif_mohamed">Sender Account</string>
+    <string name="to_n_hazem_khaled">Receiver Account</string>
+    <string name="transaction_number">#1</string>
+    <string name="amount_1000">Amount: 1000 NGN</string>
+    <string name="my_phone_number">08093536368</string>
+    <string name="phone_number_txt">Phone Number:</string>
+    <string name="account_number">01000883795</string>
+    <string name="account_number_txt">Account Number:</string>
+    <string name="sortcode">20192504</string>
+    <string name="BankCode">Bank Code</string>
+    <string name="ifsc_code">IFSC Code</string>
+    <string name="money_eg">100000 NGN</string>
+    <string name="current_balance">Current Balance</string>
+    <string name="email_txt">Email:</string>
+    <string name="transfer_money">Transfer Money</string>
+    <string name="logout">Logout</string>
+    <string name="account_number_icon">account number icon</string>
+    <string name="client_image">client image</string>
+    <string name="email_of_client">email of client</string>
+    <string name="illustration">illustyrate</string>
+
+
+    <string name="bank_logo">bank logo</string>
+    <string name="app_title">Bank with Kudi</string>
+    <string name="app_subtitle">Your Trusted Payment Gateway</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="sign_in_failed">signinfail</string>
+    <string name="company_name">Kudi Finance</string>
+    <string name="login">Let\'s started</string>
+    <string name="accounts">Accounts</string>
+
+</resources>

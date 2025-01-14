@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#00D4BB</color>
+    <color name="purple_500">#03A9F4</color>
+    <color name="purple_700">#2196F3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="button_background_color">#009688</color> <!-- Orange -->
+
+
+    <!-- colors.xml -->
+    <color name="status_chip_background">#E0E0E0</color>
+    <color name="error">#AD1457</color>
+    <color name="success">#2E7D32</color>
+
+    <color name="app_theme">#009dff</color>
+    <color name="app_theme_light">#f6fbff</color>
+    <color name="edit_text_border">#03A9f4</color>
+    <color name="edit_text_background">#f6fbff</color>
+
+
+    <color name="mediumBlack">#151B20</color>
+    <color name="MediumGray">#313C44</color>
+    <color name="lightGray">#DFDFDF</color>
+    <color name="black">#FF000000</color>
+    <color name="TealGreen">#128C7E</color>
+    <color name="darkGray">#707070</color>
+    <color name="darkTealGreen">#06776A</color>
+
+    <color name="background">@color/MediumGray</color>
+    <color name="item_row_background">@color/mediumBlack</color>
+    <color name="activeBottomNavColor">@color/TealGreen</color>
+    <color name="inActiveBottomNavColor">@color/darkGray</color>
+    <color name="border">@color/lightGray</color>
+    <color name="textColor">@color/lightGray</color>
+    <color name="bottom_nav_background">@color/mediumBlack</color>
+</resources>

@@ -1,0 +1,58 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.FintechApp" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+         <item name="colorPrimary">@color/app_theme</item>
+    </style>
+
+
+    <style name="customer_card_view.style" parent="Widget.MaterialComponents.CardView">
+        <item name="shapeAppearanceOverlay">@style/customer_card_view</item>
+
+    </style>
+
+    <style name="customer_card_view" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">42dp</item>
+        <item name="cornerSizeTopLeft">42dp</item>
+        <item name="cornerSizeBottomLeft">48dp</item>
+        <item name="cornerSizeBottomRight">48dp</item>
+
+    </style>
+
+
+    <!-- Base application theme. -->
+    <style name="Theme.EmailPasswordAuthentivation" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/black</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/purple_200</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">@color/black</item>
+        <!-- Customize your theme here. -->
+    </style>
+    <style name="TextInpuLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <item name="hintTextColor">@color/black</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="boxStrokeColor">@color/black</item>
+    </style>
+
+
+    <!-- Base application theme. -->
+    <style name="Theme.SimpleBankApp" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/mediumBlack</item>
+        <item name="colorPrimaryVariant">@color/black</item>
+        <item name="colorOnPrimary">@color/TealGreen</item>
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+    </style>
+    <style name="splashTheme" parent="Theme.AppCompat.Light.NoActionBar">
+         <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+
+</resources>
