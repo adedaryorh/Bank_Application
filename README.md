@@ -1,6 +1,8 @@
 # Fintech App
 
-This is a bank clone mobile application built using KOtlin and XML. It integrates Firebase and SQLite to manage user accounts, transactions, and local data storage.
+This is a bank clone mobile application built using KOtlin and XML. 
+
+It integrates Firebase and SQLite to manage user accounts, transactions, and local data storage.
 
 ## Features
 - User authentication (Login) using Firebase.
@@ -26,7 +28,7 @@ Clone this repository to your local machine:
 git clone <https://github.com/adedaryorh/Bank_Application.git>
 
 
-Add the generate google-services.json file from firebase to the app/ directory.
+Add the generated "google-services.json" file from Firebase to the app/ directory.
 
 
 Ensure Firebase services (Authentication, Realtime Database, etc.) are properly set up in your Firebase console.
