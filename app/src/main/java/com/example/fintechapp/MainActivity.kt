@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var navController: NavController
-     private lateinit var navView: NavigationView
+    private lateinit var navView: NavigationView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,5 +68,4 @@ class MainActivity : AppCompatActivity() {
     }
 
 }
-
 

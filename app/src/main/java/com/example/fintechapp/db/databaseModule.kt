@@ -15,8 +15,9 @@ val databaseModule = module {
         ).build()
     }
 
-    single { get<BankDatabase>().accountsDao() }
-    single { get<BankDatabase>().transactionsDao() }
+    single { get<BankDatabase>().accountDao() }
+    single { get<BankDatabase>().transactionDao() }
+    single { get<BankDatabase>().userDao() }
 }
 
 

@@ -23,7 +23,6 @@ class AccountsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setupRecyclerView()
         setupTransferButton()
         observeAccounts()
@@ -55,30 +54,6 @@ class AccountsFragment : Fragment() {
         }
     }
 
-//    private fun showTransferDialog() {
-//        val accounts = accountAdapter.currentList
-//        if (accounts.size < 2) {
-//            showError("Need at least 2 accounts to make a transfer")
-//            return
-//        }
-//
-//        TransferDialogFragment.newInstance(accounts).apply {
-//            setTransferCallback { sourceId, destinationId, amount ->
-//                performTransfer(sourceId, destinationId, amount)
-//            }
-//        }.show(parentFragmentManager, "transfer_dialog")
-//    }
-//
-//    private fun performTransfer(sourceId: String, destinationId: String, amount: Double) {
-//        viewLifecycleOwner.lifecycleScope.launch {
-//            try {
-//                accountsViewModel.performTransfer(sourceId, destinationId, amount)
-//                showSuccess("Transfer completed successfully")
-//            } catch (e: Exception) {
-//                showError(e.message ?: "Transfer failed")
-//            }
-//        }
-//    }
 
     private fun showError(message: String) {
         Snackbar.make(binding.root, message, Snackbar.LENGTH_LONG)
@@ -103,4 +78,9 @@ class AccountsFragment : Fragment() {
         binding = FragmentAccountsBinding.inflate(layoutInflater)
         return binding.root
     }
+
+//    override fun onDestroyView() {
+//        super.onDestroyView()
+//        _binding = null
+//    }
 }

@@ -2,36 +2,50 @@
 package com.example.fintechapp.data.repository
 
 import com.example.fintechapp.data.local.AccountDao
-import com.example.fintechapp.data.model.Account
-import kotlinx.coroutines.flow.Flow
+import com.example.fintechapp.data.local.TransactionDao
+import com.example.fintechapp.data.model.Transaction
 
-class AccountRepository(private val accountDao: AccountDao) {
 
-    fun getAccountsForUser(customerId: String): Flow<List<Account>> {
-        return accountDao.getAccountsForUser(customerId)
-    }
+class AccountRepository(
+    private val accountDao: AccountDao,
+    private val transactionDao: TransactionDao
+) {
 
-    suspend fun getAccountById(accountId: String): Account? {
-        return accountDao.getAccountById(accountId)
-    }
+    fun getAccountsForUser(userId: String) = accountDao.getAccountsForUser(userId)
 
-    suspend fun insertAccount(account: Account): Long {
-        return accountDao.insertAccount(account)
-    }
+    suspend fun performTransfer(
+        sourceId: String,
+        destinationId: String,
+        amount: Double
+    ): Result<Transaction> {
+        return try {
+            val sourceAccount = accountDao.getAccountById(sourceId) ?: return Result.failure(
+                Exception("Source account not found")
+            )
+            val destAccount = accountDao.getAccountById(destinationId) ?: return Result.failure(
+                Exception("Destination account not found")
+            )
 
-    suspend fun updateAccount(account: Account): Int {
-        return accountDao.updateAccount(account)
-    }
+            if (sourceAccount.accountBalance < amount) {
+                return Result.failure(Exception("Insufficient funds"))
+            }
 
-    suspend fun deleteAccount(account: Account) {
-        accountDao.deleteAccount(account)
-    }
+            sourceAccount.accountBalance -= amount
+            destAccount.accountBalance += amount
 
-    fun getAccountsAboveBalance(minBalance: Double): Flow<List<Account>> {
-        return accountDao.getAccountsAboveBalance(minBalance)
-    }
+            accountDao.updateAccount(sourceAccount)
+            accountDao.updateAccount(destAccount)
 
-    fun performTransfer(sourceId: String, destinationId: String, amount: Double): Result<Transaction>? {
+            val transaction = Transaction(
+                sourceAccountId = sourceId,
+                destinationAccountId = destinationId,
+                transferAmount = amount
+            )
+            transactionDao.insertTransaction(transaction)
 
+            Result.success(transaction)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
     }
 }

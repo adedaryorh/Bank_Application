@@ -38,14 +38,13 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         auth = Firebase.auth
-
         setupLogin()
     }
 
+
     private fun setupLogin() {
-        binding.login.setOnClickListener {
+        binding.btnLogin.setOnClickListener {
             if (auth.currentUser != null) {
                 navigateHome()
             } else {
@@ -112,11 +111,7 @@ class LoginActivity : AppCompatActivity() {
 
                     return
                 }
-
             }
-
         }
-
     }
-
 }

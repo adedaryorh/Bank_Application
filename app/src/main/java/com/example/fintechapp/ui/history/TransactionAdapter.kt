@@ -22,7 +22,6 @@ class TransactionAdapter :
                 transactionDate.text = transaction.timestamp.toString()
                 //transactionStatus.setText(transaction.status)
             }
-
         }
     }
 
@@ -48,7 +47,5 @@ class TransactionAdapter :
         override fun areContentsTheSame(oldItem: Transaction, newItem: Transaction): Boolean =
             oldItem == newItem
     }
-
-
 }
 

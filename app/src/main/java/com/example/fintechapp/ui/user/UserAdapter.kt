@@ -11,7 +11,7 @@ class UserAdapter : RecyclerView.Adapter<UserAdapter.ViewHolder>() {
     private var userAccounts: List<User> = listOf()
     var onItemClick: ((User) -> Unit)? = null
 
-    fun setData(@SuppressLint("RestrictedApi") accounts: List<com.firebase.ui.auth.data.model.User>) {
+    fun setData(@SuppressLint("RestrictedApi") accounts: List<User>) {
         userAccounts = userAccounts
         notifyDataSetChanged()
     }
@@ -24,6 +24,9 @@ class UserAdapter : RecyclerView.Adapter<UserAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val account = userAccounts[position]
         holder.bind(account)
+        holder.itemView.setOnClickListener {
+            onItemClick?.invoke(account)
+        }
     }
 
     override fun getItemCount(): Int = userAccounts.size
@@ -31,7 +34,9 @@ class UserAdapter : RecyclerView.Adapter<UserAdapter.ViewHolder>() {
     inner class ViewHolder(private val binding: ItemUserBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(account: User) {
             binding.tvAccountHolder.text = account.customerName
-            binding.tvAccountBalance.text = "Balance: ${account.currentBalance}"
+            binding.tvAccountNumber.text = "Account: ${account.accountNumber}"
+            binding.tvBankCode.text = "Sort Code: ${account.sortCode}"
+            binding.tvAccountBalance.text = "Balance: NGN${account.currentBalance}"
         }
     }
 }

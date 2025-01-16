@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.example.fintechapp.R
 import com.example.fintechapp.databinding.FragmentHomepageBinding
 import com.google.firebase.auth.FirebaseAuth
 
@@ -23,6 +25,16 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         auth = FirebaseAuth.getInstance()
+
+        // Add click listener for the Sign-Up button
+        binding.signUpButton.setOnClickListener {
+            findNavController().navigate(R.id.action_home_to_signup)
+        }
+
+        // Navigate to LoginFragment
+        binding.loginButton.setOnClickListener {
+            findNavController().navigate(R.id.action_home_to_login)
+        }
     }
 
     override fun onDestroyView() {

@@ -184,5 +184,4 @@ class TransferFragment : Fragment() {
         binding = FragmentTransferBinding.inflate(inflater, container, false)
         return binding.root
     }
-
 }

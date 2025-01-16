@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     app:startDestination="@id/homeFragment">
 
+    <!-- Home Fragment -->
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.fintechapp.ui.HomeFragment"
@@ -21,22 +22,17 @@
         android:id="@+id/loginFragment"
         android:name="com.example.fintechapp.ui.auth.LoginFragment"
         android:label="Login"
-        tools:layout="@layout/activity_login">
+        tools:layout="@layout/fragment_login">
+        <!-- Action to navigate to SignupFragment -->
         <action
-            android:id="@+id/action_login_to_userProfiles"
+            android:id="@+id/action_loginFragment_to_signupFragment"
+            app:destination="@id/signupFragment" />
+        <!-- Action to navigate to UserFragment -->
+        <action
+            android:id="@+id/action_loginFragment_to_usersFragment"
             app:destination="@id/usersFragment" />
     </fragment>
-
-    <fragment
-        android:id="@+id/signupFragment"
-        android:name="com.example.fintechapp.ui.user.SignupFragment"
-        android:label="Signup"
-        tools:layout="@layout/fragment_signup">
-        <action
-            android:id="@+id/action_signup_to_userProfiles"
-            app:destination="@id/usersFragment" />
-    </fragment>
-
+    <!-- Users Fragment -->
     <fragment
         android:id="@+id/usersFragment"
         android:name="com.example.fintechapp.ui.user.UserFragment"
@@ -47,6 +43,31 @@
             app:destination="@id/accountsFragment" />
     </fragment>
 
+    <!-- Signup Fragment -->
+    <fragment
+        android:id="@+id/signupFragment"
+        android:name="com.example.fintechapp.ui.user.SignupFragment"
+        android:label="Signup"
+        tools:layout="@layout/fragment_signup">
+        <!-- Action to navigate to LoginFragment -->
+        <action
+            android:id="@+id/action_signupFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+
+
+    <!-- User Account Fragment -->
+    <fragment
+        android:id="@+id/userFragment"
+        android:name="com.example.fintechapp.ui.user.UserFragment"
+        android:label="User Profiles"
+        tools:layout="@layout/fragment_users">
+        <action
+            android:id="@+id/action_users_to_transactions"
+            app:destination="@id/accountsFragment" />
+    </fragment>
+
+    <!-- Accounts Fragment -->
     <fragment
         android:id="@+id/accountsFragment"
         android:name="com.example.fintechapp.ui.accounts.AccountsFragment"
@@ -60,12 +81,14 @@
             app:destination="@id/transferFragment" />
     </fragment>
 
+    <!-- Transaction History Fragment -->
     <fragment
         android:id="@+id/transactionHistoryFragment"
         android:name="com.example.fintechapp.ui.history.TransactionHistoryFragment"
         android:label="Transaction History"
         tools:layout="@layout/fragment_transaction_history" />
 
+    <!-- Transfer Fragment -->
     <fragment
         android:id="@+id/transferFragment"
         android:name="com.example.fintechapp.ui.transfer.TransferFragment"
@@ -76,6 +99,7 @@
             app:destination="@id/transferConfirmationDialog" />
     </fragment>
 
+    <!-- Transfer Confirmation Dialog -->
     <dialog
         android:id="@+id/transferConfirmationDialog"
         android:name="com.example.fintechapp.ui.transfer.TransferConfirmationDialog"

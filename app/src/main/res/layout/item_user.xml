@@ -15,7 +15,6 @@
         android:layout_height="165dp"
         android:background="@color/app_theme_light">
 
-
         <!-- Account Holder Name -->
         <TextView
             android:id="@+id/tvAccountHolder"
