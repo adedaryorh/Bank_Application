@@ -7,56 +7,65 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import com.example.fintechapp.R
-import com.example.fintechapp.data.model.Account
+import com.example.fintechapp.data.model.User
 import com.example.fintechapp.databinding.FragmentTransferBinding
-import com.example.fintechapp.ui.accounts.AccountsViewModel
 import kotlinx.coroutines.launch
-import org.koin.androidx.viewmodel.ext.android.activityViewModel
-
 
 class TransferFragment : Fragment() {
-    private lateinit var binding: FragmentTransferBinding
-    private val accountsViewModel: AccountsViewModel by activityViewModel()
-    private var accounts: List<Account> = emptyList()
+    private var _binding: FragmentTransferBinding? = null
+    private val binding get() = _binding!!
+    private lateinit var selectedUser: User
+    private val accounts = mutableListOf<User>() // Mock or actual data
 
-
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentTransferBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        setupAccountDropdowns()
-//        setupAmountValidation()
-//        setupReviewButton()
-//        observeAccounts()
+        // Retrieve the selected user from arguments
+        selectedUser = arguments?.getParcelable("selectedUser") ?: User(0, "", "", "", "", "", 0.0)
+
+        // Mock Data (replace this with actual data if needed)
+        setupMockData()
+
+        // Setup dropdowns and actions
+        setupAccountDropdowns()
+        setupAmountValidation()
+        setupReviewButton()
+    }
+
+    private fun setupMockData() {
+        accounts.addAll(
+            listOf(
+                User(1, "John Doe", "john.doe@example.com", "1234567890", "12345678", "001122", 5000.00),
+                User(2, "Jane Smith", "jane.smith@example.com", "0987654321", "87654321", "223344", 10000.00)
+            )
+        )
     }
 
     private fun setupAccountDropdowns() {
-        // Create adapters for the dropdown menus
         val fromAdapter = ArrayAdapter(
-            requireContext(), R.layout.item_dropdown_account, mutableListOf<Account>()
+            requireContext(),
+            R.layout.item_dropdown_account,
+            accounts.map { it.customerName }
         )
+        binding.fromAccount.setAdapter(fromAdapter)
 
         val toAdapter = ArrayAdapter(
-            requireContext(), R.layout.item_dropdown_account, mutableListOf<Account>()
+            requireContext(),
+            R.layout.item_dropdown_account,
+            accounts.map { it.customerName }
         )
-
-        binding.fromAccount.setAdapter(fromAdapter)
         binding.toAccount.setAdapter(toAdapter)
-
-        // Handle account selection changes
-        binding.fromAccount.setOnItemClickListener { _, _, position, _ ->
-            val selectedAccount = accounts[position]
-            updateToAccountDropdown(selectedAccount)
-        }
-
-        binding.toAccount.setOnItemClickListener { _, _, _, _ ->
-            validateForm()
-        }
     }
 
     private fun setupAmountValidation() {
@@ -83,8 +92,8 @@ class TransferFragment : Fragment() {
             return false
         }
 
-        val selectedFromAccount = getSelectedFromAccount()
-        if (selectedFromAccount != null && amount > selectedFromAccount.accountBalance) {
+        val selectedFromAccount = accounts.find { it.customerName == binding.fromAccount.text.toString() }
+        if (selectedFromAccount != null && amount > selectedFromAccount.currentBalance) {
             binding.amountLayout.error = "Insufficient funds"
             return false
         }
@@ -93,22 +102,30 @@ class TransferFragment : Fragment() {
         return true
     }
 
+    private fun setupReviewButton() {
+        binding.review.setOnClickListener {
+            if (validateForm()) {
+                Toast.makeText(requireContext(), "Transfer reviewed successfully", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
     private fun validateForm(): Boolean {
-        val fromAccount = getSelectedFromAccount()
-        val toAccount = getSelectedToAccount()
+        val fromAccount = binding.fromAccount.text.toString()
+        val toAccount = binding.toAccount.text.toString()
 
-        if (fromAccount == null) {
-            binding.fromAccountLayout.error = "Please select source account"
+        if (fromAccount.isEmpty()) {
+            binding.fromAccountLayout.error = "Please select a source account"
             return false
         }
 
-        if (toAccount == null) {
-            binding.toAccountLayout.error = "Please select destination account"
+        if (toAccount.isEmpty()) {
+            binding.toAccountLayout.error = "Please select a destination account"
             return false
         }
 
-        if (fromAccount.id == toAccount.id) {
-            binding.toAccountLayout.error = "Cannot transfer to same account"
+        if (fromAccount == toAccount) {
+            binding.toAccountLayout.error = "Cannot transfer to the same account"
             return false
         }
 
@@ -118,70 +135,8 @@ class TransferFragment : Fragment() {
         return validateAmount()
     }
 
-    private fun setupReviewButton() {
-        binding.review.setOnClickListener {
-            if (validateForm()) {
-                showTransferReviewDialog()
-            }
-        }
-    }
-
-    private fun showTransferReviewDialog() {
-        val fromAccount = getSelectedFromAccount()
-        val toAccount = getSelectedToAccount()
-        val amount = binding.amount.text.toString().toDouble()
-
-        TransferReviewDialogFragment.newInstance(
-            fromAccount!!.id, toAccount!!.id, amount
-        ).show(parentFragmentManager, "transfer_review")
-    }
-
-    private fun observeAccounts() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                accountsViewModel.accounts.collect { accountsList ->
-                    accounts = accountsList
-                    updateAccountDropdowns()
-                }
-            }
-        }
-    }
-
-    private fun updateAccountDropdowns() {
-        (binding.fromAccount.adapter as ArrayAdapter<Account>).apply {
-            clear()
-            addAll(accounts)
-            notifyDataSetChanged()
-        }
-
-        // Clear selected accounts
-        binding.fromAccount.text = null
-        binding.toAccount.text = null
-    }
-
-    private fun updateToAccountDropdown(selectedFromAccount: Account) {
-        val availableAccounts = accounts.filter { it.id != selectedFromAccount.id }
-        (binding.toAccount.adapter as ArrayAdapter<Account>).apply {
-            clear()
-            addAll(availableAccounts)
-            notifyDataSetChanged()
-        }
-        binding.toAccount.text = null
-    }
-
-    private fun getSelectedFromAccount(): Account? {
-        val selectedText = binding.fromAccount.text.toString()
-        return accounts.find { it.toString() == selectedText }
-    }
-
-    private fun getSelectedToAccount(): Account? {
-        val selectedText = binding.toAccount.text.toString()
-        return accounts.find { it.toString() == selectedText }
-    }
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentTransferBinding.inflate(inflater, container, false)
-        return binding.root
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

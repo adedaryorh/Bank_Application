@@ -32,6 +32,7 @@
             android:id="@+id/action_loginFragment_to_usersFragment"
             app:destination="@id/usersFragment" />
     </fragment>
+
     <!-- Users Fragment -->
     <fragment
         android:id="@+id/usersFragment"
@@ -39,9 +40,14 @@
         android:label="User Profiles"
         tools:layout="@layout/fragment_users">
         <action
-            android:id="@+id/action_users_to_transactions"
-            app:destination="@id/accountsFragment" />
+            android:id="@+id/action_usersFragment_to_transferFragment"
+            app:destination="@id/transferFragment">
+            <argument
+                android:name="selectedUser"
+                app:argType="com.example.fintechapp.data.model.User" />
+        </action>
     </fragment>
+
 
     <!-- Signup Fragment -->
     <fragment

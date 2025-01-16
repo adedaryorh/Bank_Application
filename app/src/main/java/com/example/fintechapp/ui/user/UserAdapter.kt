@@ -1,18 +1,16 @@
-package com.example.fintechapp.ui.user
-
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fintechapp.data.model.User
 import com.example.fintechapp.databinding.ItemUserBinding
 
-class UserAdapter : RecyclerView.Adapter<UserAdapter.ViewHolder>() {
-    private var userAccounts: List<User> = listOf()
-    var onItemClick: ((User) -> Unit)? = null
+class UserAdapter(private val onItemClick: (User) -> Unit) :
+    RecyclerView.Adapter<UserAdapter.ViewHolder>() {
 
-    fun setData(@SuppressLint("RestrictedApi") accounts: List<User>) {
-        userAccounts = userAccounts
+    private var userAccounts: List<User> = listOf()
+
+    fun setData(accounts: List<User>) {
+        userAccounts = accounts
         notifyDataSetChanged()
     }
 
@@ -22,21 +20,21 @@ class UserAdapter : RecyclerView.Adapter<UserAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val account = userAccounts[position]
-        holder.bind(account)
+        val user = userAccounts[position]
+        holder.bind(user)
         holder.itemView.setOnClickListener {
-            onItemClick?.invoke(account)
+            onItemClick(user)
         }
     }
 
     override fun getItemCount(): Int = userAccounts.size
 
     inner class ViewHolder(private val binding: ItemUserBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(account: User) {
-            binding.tvAccountHolder.text = account.customerName
-            binding.tvAccountNumber.text = "Account: ${account.accountNumber}"
-            binding.tvBankCode.text = "Sort Code: ${account.sortCode}"
-            binding.tvAccountBalance.text = "Balance: NGN${account.currentBalance}"
+        fun bind(user: User) {
+            binding.tvAccountHolder.text = user.customerName
+            binding.tvAccountNumber.text = "Account: ${user.accountNumber}"
+            binding.tvBankCode.text = "Sort Code: ${user.sortCode}"
+            binding.tvAccountBalance.text = "Balance: NGN${user.currentBalance}"
         }
     }
 }
